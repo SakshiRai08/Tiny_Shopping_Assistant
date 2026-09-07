@@ -1,5 +1,9 @@
 import gradio as gr
 from Assistant import agent
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 INITIAL_MSG = "Hello! I'm your Smart Shop Assistant. Ask me the price of anything."
 
@@ -22,4 +26,4 @@ with gr.Blocks() as app:
     msg.submit(user_send, [msg, chatbot], [msg, chatbot], queue=False).then(bot_reply, chatbot, chatbot)
     gr.Examples(["How much are the shoes?", "What is the price of a hat?", "Tell me the cost of a bag.", "How much do shorts cost?", "What is the price of pants?", "How much is a jacket?", "Tell me the cost of a t-shirt.", "How much do socks cost?", "What is the price of a scarf?", "How much are gloves?"], inputs=msg)
 
-app.launch(theme=gr.themes.Soft(), share=True)
+app.launch(theme=gr.themes.Soft(), server_name="0.0.0.0", server_port=int(os.environ.get("PORT", 10000)))

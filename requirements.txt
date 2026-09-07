@@ -1,3 +1,4 @@
 gradio==6.0.0
+openai
 groq
 python-dotenv
